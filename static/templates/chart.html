@@ -1,0 +1,75 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{.Title}}</title>
+
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+
+    <!-- Normalize -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+
+    <!-- Mustard UI -->
+    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
+    <script>
+        window.onload = function codeAddress() {
+            $.getJSON('{{.Link}}', function(data) {
+                for (let i = 0; i < data.dataset.length; i++) {
+                    var set = data.dataset[i];
+                    var id = 'chart'+set.id
+                    var ctx = document.getElementById(id);
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: set.data,
+                        options: {
+                            // tooltips: {
+                            //     mode: 'index'
+                            // },
+                            title: {
+                                display: true,
+                                text: ["votes"],
+                            }
+                        }
+                    });
+                    
+                }
+            });
+        }
+        // window.onload = codeAddress;
+    </script>
+
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="nav-logo">
+                <b>Easy Survey</b>
+            </div>
+        </div>
+    </ul>
+</div>
+    </nav>
+
+    <div class="container" style="text-align:center">
+
+        <h3>{{.Title}}</h3>
+
+
+        {{range .Element}}
+        <h5>{{.ChartTitle}}</h5><br>
+        <canvas id="chart{{.ID}}" width="400" height="400"></canvas>
+        <br><br><br>
+        {{end}}
+
+    </div>
+
+</body>
+</html>

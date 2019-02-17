@@ -1,0 +1,10 @@
+admin:
+  name: "admin"
+  password: "1234"
+
+database:
+  address: "localhost:28015"
+  db-name: "polls"
+poll:
+  questions: 10
+  answers: 10
